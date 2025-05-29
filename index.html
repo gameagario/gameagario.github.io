@@ -166,6 +166,10 @@
       opacity: 1;
     }
 
+    .donate-btn:hover {
+      background-color: #4caf50;
+    }
+
     @keyframes float {
       0% {
         transform: translate(0, 0);
@@ -213,7 +217,7 @@
   <!-- دکمه‌ها -->
   <div class="btn-group">
     <button class="download-btn" onclick="downloadGame('x64')">WinX64</button>
-    <button class="donate-btn"">Donate Us</button>
+    <button class="donate-btn" onclick="copyWallet()" style="width: 150px;">Donate Us</button>
     <button class=" download-btn" onclick="downloadGame('x32')">WinX32</button>
   </div>
 
@@ -239,6 +243,25 @@
         : './download/agar_x32.exe';
       window.location.href = link;
     }
+    function copyWallet() {
+      const wallet = "UQCqpRyYEX22UGmGILvmoH2rirQC8XywyY5ZIKTkA_cnPXuu";
+      const buttons = document.getElementsByClassName("donate-btn");
+
+      navigator.clipboard.writeText(wallet).then(() => {
+        for (let btn of buttons) {
+          btn.innerHTML = "Copied";
+        }
+
+        setTimeout(() => {
+          for (let btn of buttons) {
+            btn.innerHTML = "Donate Us";
+          }
+        }, 750);
+      }).catch(err => {
+        console.error("Failed to copy wallet address:", err);
+      });
+    }
+
   </script>
 
 </body>
